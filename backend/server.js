@@ -1,7 +1,8 @@
 const express=require("express")
 const dotenv=require("dotenv")
 const cookieParser = require('cookie-parser');
-const app=express();
+// const app=express();
+const {app,io,server} =require("./socket/socket")
 
 
 const{ connectToMongodb }=require("../db/connectToMongodb")
@@ -22,7 +23,7 @@ app.use("/api/messages",messageRoutes)
 app.use("/api/user",userRoutes)
 
 
-app.listen(PORT,()=>{
+server.listen(PORT,()=>{
     connectToMongodb()
     console.log(`the port is listening at ${PORT}`)
 })

@@ -66,6 +66,7 @@ const handlelogin = async (req, res) => {
   res.status(200).json({
     _id:user._id,
     userName:user.userName,
+    fullName:user.fullName,
     profilePic:user.profilePic,
   })
   // console.log(profilePic)

@@ -49,6 +49,11 @@ const getMessage=async (req,res)=>{
             participants:{$all:[userTochatId,senderId]}
         }).populate("messages")
 
+
+        if (!conversation || !conversation.messages) {
+            return res.status(200).json([]);  // Return an empty array if no messages found
+          }
+
         res.status(200).json(conversation.messages)
 
         

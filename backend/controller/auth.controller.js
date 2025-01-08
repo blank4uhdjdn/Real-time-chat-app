@@ -58,12 +58,17 @@ const handlelogin = async (req, res) => {
   const user=await User.findOne({userName})
   const isPasswordCorrect=await bcrypt.compare(password,user?.password||"");
   if(!user||!isPasswordCorrect){
-    res.status(400).json({message:"invalid usename or password"})
+   return res.status(400).json({error:"invalid usename or password"})
   }
 
   generateTokenAndSetCookie(user._id,res)
 
-  res.status(200).json({message:"login successfull"})
+  res.status(200).json({
+    _id:user._id,
+    userName:user.userName,
+    profilePic:user.profilePic,
+  })
+  // console.log(profilePic)
 
   } catch (error) {
     console.log(`error in login controller ${error.message}`);
